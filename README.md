@@ -16,6 +16,8 @@ This project is a fork of
 *  mongodb >= 2.6.x
 *  crownd
 
+### Instructions
+
 ### Step 1 - Download and install the Crown client
 
     $ wget "https://github.com/Crowndev/crown-core/releases/download/v0.13.2.0/Crown-0.13.2.0-Linux64.zip" -O $dir/crown.zip
@@ -60,9 +62,13 @@ Install Mongo:
 
     $ apt install mongodb -y
 
+Create a directory for the database
+
+    $ mkdir/root/explorer/mongodb/
+
 Start MongoD:
    
-    $ mongod
+    $ mongod --dbpath /root/explorer/mongodb/
 
 Enter MongoDB cli:
    
@@ -127,6 +133,7 @@ Change file name
     $ ufw allow 433
     $ ufw allow 27017
     $ ufw allow 3001
+    $ ufw enable
 
 
 ### Step 9 - Start Explorer
