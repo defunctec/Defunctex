@@ -56,7 +56,11 @@ Start the wallet
 
     $ apt update && sudo apt upgrade -y
 
-### Step 3 - Create database
+### Step 3 - Get the source
+
+    $ git clone https://github.com/defunctec/explorer explorer
+
+### Step 4 - Create database
 
 Install Mongo:
 
@@ -90,15 +94,11 @@ Exit mongoDB
 
     > exit
 
-### Step 4 - Install NodeJS
+### Step 5 - Install NodeJS
     
     $ apt-get install curl python-software-properties
     $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
     $ apt-get install nodejs -y
-
-### Step 5 - Get the source
-
-    $ git clone https://github.com/defunctec/explorer explorer
 
 ### Step 6 - Install node modules
 
