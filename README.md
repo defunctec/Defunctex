@@ -64,7 +64,7 @@ Install Mongo:
 
 Create a directory for the database
 
-    $ mkdir/root/explorer/mongodb/
+    $ mkdir /root/explorer/mongodb/
 
 Start MongoD:
    
