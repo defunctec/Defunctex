@@ -70,6 +70,10 @@ Create a directory for the database
 
     $ mkdir /root/explorer/mongodb/
 
+Stop any mongo processes
+
+    $ killall mongod
+
 Start MongoD:
    
     $ mongod --dbpath /root/explorer/mongodb/
@@ -96,22 +100,30 @@ Exit mongoDB
 
 ### Step 5 - Install NodeJS
     
-    $ apt-get install curl python-software-properties
+    $ apt-get install curl python-software-properties -y
     $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
     $ apt-get install nodejs -y
 
 ### Step 6 - Install node modules
 
     $ cd explorer
-    $ apt install npm -y
+    $ npm install
     $ npm install --production
 
 ### Step 7 - Configure
     
-    $ cd explorer
     $ nano settings.json.template
 
 Change the appropriate details, eg
+
+    // database settings (MongoDB)
+    "dbsettings": {
+    "user": "YOURDBUSER",
+    "password": "YOURDBPASS",
+    "database": "explorerdb",
+    "address": "localhost",
+    "port": 27017
+  },
 
     // wallet settings
     "wallet": {
@@ -126,55 +138,28 @@ Change file name
     cp ./settings.json.template ./settings.json
 
 ### Step 8 - Enable firewall
-    
+
+Crown ports    
+
     $ ufw allow 9340
     $ ufw allow 9341
+FTP/SSH
+
+    $ ufw allow 22
+    $ ufw allow 21
+HTTP/HTTPS
+
     $ ufw allow 80
     $ ufw allow 433
+
+DB/Node
+
     $ ufw allow 27017
     $ ufw allow 3001
     $ ufw enable
 
 
-### Step 9 - Start Explorer
-
-    $ npm start
-
-*note: mongod must be running to start the explorer*
-
-As of version 1.4.0 the explorer defaults to cluster mode, forking an instance of its process to each cpu core. This results in increased performance and stability. Load balancing gets automatically taken care of and any instances that for some reason die, will be restarted automatically. For testing/development (or if you just wish to) a single instance can be launched with
-
-    node --stack-size=10000 bin/instance
-
-To stop the cluster you can use
-
-    $ npm stop
-
-### Syncing databases with the blockchain
-
-sync.js (located in scripts/) is used for updating the local databases. This script must be called from the explorers root directory.
-
-    Usage: node scripts/sync.js [database] [mode]
-
-    database: (required)
-    index [mode] Main index: coin info/stats, transactions & addresses
-    market       Market data: summaries, orderbooks, trade history & chartdata
-
-    mode: (required for index database only)
-    update       Updates index from last sync to current block
-    check        checks index for (and adds) any missing transactions/addresses
-    reindex      Clears index then resyncs from genesis to current block
-
-    notes:
-    * 'current block' is the latest created block when script is executed.
-    * The market database only supports (& defaults to) reindex mode.
-    * If check mode finds missing data(ignoring new data since last sync),
-      index_timeout in settings.json is set too low.
-
-
-*It is recommended to have this script launched via a cronjob at 1+ min intervals.*
-
-**crontab**
+### Step 9 - Crontab
 
 Example crontab; update index every minute, market data every 2 minutes and peers every 5 minutes.
 
@@ -182,22 +167,25 @@ Example crontab; update index every minute, market data every 2 minutes and peer
     */2 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/sync.js market > /dev/null 2>&1
     */5 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/peers.js > /dev/null 2>&1
 
-### Install Forever to keep the javascript running
+### Step 10 - Install Forever to keep the javascript running
 
-If the terminal window running the explorer closes the explorer stops running.
-You can keep it running using Forever. Install it by
+You can keep node running using forever
 
     $ npm install forever -g
     $ npm install forever-monitor
 
-Now, instead of npm start you can
+You can start using
 
     $ forever start bin/cluster
 
-If you want to shut it down use
+And stop
 
     $ forever stop bin/cluster
- 
+
+Sync the Crown blockchain with the explorer 
+
+    $ node scripts/sync.js index update
+
 ### Wallet
 
 The wallet must be running with at least the following flags
