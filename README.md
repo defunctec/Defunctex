@@ -161,11 +161,17 @@ DB/Node
 
 ### Step 9 - Crontab
 
+Open crontab
+
+    $ crontab -e
+
 Example crontab; update index every minute, market data every 2 minutes and peers every 5 minutes.
 
     */1 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/sync.js index update > /dev/null 2>&1
     */2 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/sync.js market > /dev/null 2>&1
     */5 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/peers.js > /dev/null 2>&1
+
+Save cron
 
 ### Step 10 - Install Forever to keep the javascript running
 
