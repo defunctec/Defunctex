@@ -76,7 +76,7 @@ Stop any mongo processes
 
 Start MongoD:
    
-    $ mongod --dbpath /root/explorer/mongodb/
+    $ mongod --dbpath /root/explorer/mongodb/ --fork --logpath explorer
 
 Enter MongoDB cli:
    
