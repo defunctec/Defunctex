@@ -143,10 +143,12 @@ Crown ports
 
     $ ufw allow 9340
     $ ufw allow 9341
+
 FTP/SSH
 
     $ ufw allow 22
     $ ufw allow 21
+
 HTTP/HTTPS
 
     $ ufw allow 80
@@ -184,7 +186,7 @@ You can start using
 
     $ forever start bin/cluster
 
-And stop
+And stop using (optional)
 
     $ forever stop bin/cluster
 
