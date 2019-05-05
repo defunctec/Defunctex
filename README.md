@@ -194,12 +194,6 @@ Sync the Crown blockchain with the explorer
 
     $ node scripts/sync.js index update
 
-### Wallet
-
-The wallet must be running with at least the following flags
-
-    -daemon -txindex
-
 ### Known Issues
 
 **script is already running.**
