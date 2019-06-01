@@ -60,6 +60,10 @@ Start the wallet
 
     $ git clone https://github.com/defunctec/explorer explorer
 
+Enter the explorer folder
+    
+    $ cd explorer
+
 ### Step 4 - Create database
 
 Install Mongo:
