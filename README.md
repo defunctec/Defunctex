@@ -110,7 +110,6 @@ Exit mongoDB
 
 ### Step 6 - Install node modules
 
-    $ cd explorer
     $ npm install
     $ npm install --production
 
