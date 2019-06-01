@@ -8,7 +8,7 @@ This project is a fork of
 
 ### See it in action
 
-*  [DefunctEx](http://defunctex.com:3001)
+*  [DefunctEx](https://defunctex.com)
 
 ### Requires
 
