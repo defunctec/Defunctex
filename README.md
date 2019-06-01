@@ -185,6 +185,10 @@ You can keep node running using forever
     $ npm install forever -g
     $ npm install forever-monitor
 
+Make sure npm is fully installed
+
+    $ npm install
+
 You can start using
 
     $ forever start bin/cluster
